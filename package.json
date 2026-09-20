@@ -1,0 +1,12 @@
+{
+  "name": "ecosort-ai",
+  "version": "1.0.0",
+  "description": "EcoSort AI - AI-Powered Waste Segregation & Recycling Assistant (SDG 12 & 11)",
+  "private": true,
+  "scripts": {
+    "install:backend": "cd backend && npm install",
+    "start:backend": "cd backend && npm start",
+    "start:frontend": "npx serve frontend -l 3000"
+  },
+  "license": "MIT"
+}
