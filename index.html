@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>EcoSort AI — Turn Waste Into the Right Choice</title>
+<meta name="description" content="EcoSort AI uses AI-powered image analysis to identify waste, classify it, and provide practical recycling and disposal guidance." />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Lucide Icons -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lucide-static/0.454.0/umd/lucide.min.js" defer></script>
+
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ============ NAVBAR ============ -->
+<header class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="#home" class="logo">
+      <span class="logo-icon">♻️</span>
+      <span class="logo-text">EcoSort <span class="logo-accent">AI</span></span>
+    </a>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="#home">Home</a>
+      <a href="#analyze">Analyze</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="#impact">Impact</a>
+      <a href="#responsible-ai">Responsible AI</a>
+    </nav>
+
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <span id="themeIcon">🌙</span>
+      </button>
+      <a href="#analyze" class="btn btn-primary btn-nav">Try EcoSort →</a>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="home">
+  <div class="hero-container">
+    <div class="hero-content">
+      <span class="badge">🌍 SDG 12 — Responsible Consumption &amp; Production</span>
+      <h1>Turn Waste Into the <span class="highlight">Right Choice.</span></h1>
+      <p class="hero-subtitle">
+        EcoSort AI uses intelligent image analysis to help identify waste, understand its category,
+        and make better recycling and disposal decisions.
+      </p>
+      <div class="hero-buttons">
+        <a href="#analyze" class="btn btn-primary btn-lg">Analyze Waste →</a>
+        <a href="#how-it-works" class="btn btn-outline btn-lg">How It Works ↓</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><strong>5</strong><span>Waste Categories</span></div>
+        <div class="stat"><strong>AI</strong><span>Vision Powered</span></div>
+        <div class="stat"><strong>SDG 12</strong><span>&amp; SDG 11 Aligned</span></div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="analysis-card floating">
+        <div class="analysis-card-header">
+          <span>♻️ EcoSort AI</span>
+          <span class="live-dot"></span>
+        </div>
+        <p class="analysis-card-sub">AI Waste Analysis</p>
+        <div class="analysis-image-preview">🧴</div>
+        <div class="analysis-result-mini">
+          <div class="mini-row"><i data-lucide="check-circle" class="icon-sm icon-success"></i> Plastic Bottle</div>
+          <div class="mini-row"><i data-lucide="recycle" class="icon-sm icon-primary"></i> Recyclable</div>
+          <div class="mini-row confidence-row">
+            <span>94% Confidence</span>
+            <div class="mini-bar"><div class="mini-bar-fill" style="width:94%"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ANALYZER ============ -->
+<section class="analyzer-section" id="analyze">
+  <div class="section-container">
+    <div class="section-heading">
+      <span class="eyebrow">Waste Analyzer</span>
+      <h2>Upload. Analyze. Act Responsibly.</h2>
+      <p>Upload a photo of a waste item and let EcoSort AI identify it, classify it, and guide you on the right disposal method.</p>
+    </div>
+
+    <div class="mode-indicator" id="modeIndicator">
+      <span class="mode-dot"></span>
+      <span id="modeText">Checking mode…</span>
+    </div>
+
+    <div class="analyzer-grid">
+      <!-- Upload Card -->
+      <div class="upload-card" id="uploadCard">
+        <div class="upload-zone" id="uploadZone">
+          <input type="file" id="fileInput" accept="image/jpeg,image/jpg,image/png,image/webp" hidden />
+          <div id="uploadPrompt">
+            <div class="upload-icon">📷</div>
+            <h3>Drop your waste image here</h3>
+            <p>or</p>
+            <button class="btn btn-outline" id="browseBtn">Browse from device</button>
+            <span class="upload-hint">JPG, PNG, WEBP • Max 10MB</span>
+          </div>
+
+          <div id="previewWrapper" class="preview-wrapper hidden">
+            <img id="previewImage" alt="Waste image preview" />
+            <div class="preview-meta">
+              <span id="fileName"></span>
+              <span id="fileSize"></span>
+            </div>
+            <div class="preview-actions">
+              <button class="btn btn-outline btn-sm" id="changeImageBtn">Change Image</button>
+              <button class="btn btn-ghost btn-sm" id="removeImageBtn">Remove</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="demo-selector" id="demoSelector">
+          <label for="demoScenario">Demo scenario (used only in Demo Mode)</label>
+          <select id="demoScenario">
+            <option value="">Random sample</option>
+            <option value="plastic_bottle">Plastic Bottle</option>
+            <option value="banana_peel">Banana Peel</option>
+            <option value="aluminum_can">Aluminum Can</option>
+            <option value="old_smartphone">Old Smartphone</option>
+            <option value="used_tissue">Used Tissue</option>
+          </select>
+        </div>
+
+        <button class="btn btn-primary btn-block btn-lg" id="analyzeBtn" disabled>
+          <i data-lucide="scan-line" class="icon-sm"></i> Analyze Waste
+        </button>
+      </div>
+
+      <!-- Result / Loading / Empty state -->
+      <div class="result-card" id="resultCard">
+        <div class="result-empty" id="resultEmpty">
+          <div class="empty-icon">🌱</div>
+          <h3>Your result will appear here</h3>
+          <p>Upload an image and click "Analyze Waste" to get started.</p>
+        </div>
+
+        <div class="result-loading hidden" id="resultLoading">
+          <div class="scan-loader"></div>
+          <h3>Analyzing your waste...</h3>
+          <ul class="loading-steps">
+            <li id="step1">Scanning image</li>
+            <li id="step2">Identifying object</li>
+            <li id="step3">Classifying waste</li>
+            <li id="step4">Generating recommendation</li>
+          </ul>
+        </div>
+
+        <div class="result-error hidden" id="resultError">
+          <div class="empty-icon">⚠️</div>
+          <h3 id="errorTitle">Something went wrong</h3>
+          <p id="errorMessage">Please try again.</p>
+          <button class="btn btn-outline" id="retryBtn">Try Again</button>
+        </div>
+
+        <div class="result-content hidden" id="resultContent">
+          <div class="result-header">
+            <span class="result-badge" id="resultModeBadge">AI ANALYSIS COMPLETE ✓</span>
+          </div>
+
+          <div class="result-block">
+            <span class="result-label">Detected Item</span>
+            <h3 id="resultItem">—</h3>
+          </div>
+
+          <div class="result-block">
+            <span class="result-label">Waste Category</span>
+            <div class="category-pill" id="resultCategory">—</div>
+          </div>
+
+          <div class="result-block">
+            <span class="result-label">Confidence</span>
+            <div class="confidence-bar-track">
+              <div class="confidence-bar-fill" id="confidenceFill"></div>
+            </div>
+            <span class="confidence-value" id="confidenceValue">—</span>
+          </div>
+
+          <div class="result-block">
+            <span class="result-label">Recommended Action</span>
+            <p id="resultDisposal">—</p>
+          </div>
+
+          <div class="result-block tip-block">
+            <span class="result-label">🌱 Sustainability Tip</span>
+            <p id="resultTip">—</p>
+          </div>
+
+          <div class="result-block warning-block">
+            <span class="result-label">⚠️ Note</span>
+            <p id="resultWarning">Local waste-management rules may vary.</p>
+          </div>
+
+          <p class="reason-text" id="resultReason"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WASTE CATEGORIES ============ -->
+<section class="categories-section">
+  <div class="section-container">
+    <div class="section-heading">
+      <span class="eyebrow">Waste Categories</span>
+      <h2>What EcoSort AI Can Classify</h2>
+    </div>
+    <div class="category-grid">
+      <div class="category-card">
+        <div class="category-icon">♻️</div>
+        <h3>Recyclable / Dry Waste</h3>
+        <p>Plastics, metals, paper, glass, and other dry materials that can typically be recycled.</p>
+      </div>
+      <div class="category-card">
+        <div class="category-icon">🍃</div>
+        <h3>Organic / Wet Waste</h3>
+        <p>Food scraps, peels, and biodegradable material suited for composting.</p>
+      </div>
+      <div class="category-card">
+        <div class="category-icon">🔋</div>
+        <h3>E-Waste</h3>
+        <p>Electronics, batteries, and devices requiring authorized disposal facilities.</p>
+      </div>
+      <div class="category-card">
+        <div class="category-icon">⚠️</div>
+        <h3>Hazardous Waste</h3>
+        <p>Chemicals, sharp objects, or materials that require extra care in handling.</p>
+      </div>
+      <div class="category-card">
+        <div class="category-icon">🗑️</div>
+        <h3>General Waste</h3>
+        <p>Non-recyclable, non-hazardous items that go to standard waste collection.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="how-section" id="how-it-works">
+  <div class="section-container">
+    <div class="section-heading">
+      <span class="eyebrow">How It Works</span>
+      <h2>From Photo to Decision in Seconds</h2>
+    </div>
+    <div class="timeline">
+      <div class="timeline-step">
+        <span class="step-number">01</span>
+        <h3>Upload</h3>
+        <p>Upload a waste image.</p>
+      </div>
+      <div class="timeline-step">
+        <span class="step-number">02</span>
+        <h3>Analyze</h3>
+        <p>AI analyzes visible characteristics.</p>
+      </div>
+      <div class="timeline-step">
+        <span class="step-number">03</span>
+        <h3>Identify</h3>
+        <p>The system identifies the likely item.</p>
+      </div>
+      <div class="timeline-step">
+        <span class="step-number">04</span>
+        <h3>Classify</h3>
+        <p>AI assigns a waste category.</p>
+      </div>
+      <div class="timeline-step">
+        <span class="step-number">05</span>
+        <h3>Act</h3>
+        <p>Receive practical disposal guidance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ IMPACT ============ -->
+<section class="impact-section" id="impact">
+  <div class="section-container">
+    <div class="section-heading">
+      <span class="eyebrow">Sustainability Impact</span>
+      <h2>Why Correct Segregation Matters</h2>
+    </div>
+    <div class="impact-grid">
+      <div class="impact-card">
+        <i data-lucide="eye" class="impact-icon"></i>
+        <h3>Better Awareness</h3>
+        <p>Helps users understand waste categories.</p>
+      </div>
+      <div class="impact-card">
+        <i data-lucide="split" class="impact-icon"></i>
+        <h3>Better Segregation</h3>
+        <p>Encourages correct separation.</p>
+      </div>
+      <div class="impact-card">
+        <i data-lucide="recycle" class="impact-icon"></i>
+        <h3>Better Recycling</h3>
+        <p>Supports responsible recycling behavior.</p>
+      </div>
+      <div class="impact-card">
+        <i data-lucide="building-2" class="impact-icon"></i>
+        <h3>Cleaner Communities</h3>
+        <p>Promotes sustainable waste-management habits.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RESPONSIBLE AI ============ -->
+<section class="responsible-section" id="responsible-ai">
+  <div class="section-container">
+    <div class="section-heading">
+      <span class="eyebrow">Responsible AI</span>
+      <h2>Built With Transparency &amp; Care</h2>
+    </div>
+    <div class="responsible-grid">
+      <div class="responsible-card">
+        <div class="responsible-icon">🔒</div>
+        <h3>Privacy</h3>
+        <p>Images should not be stored unnecessarily.</p>
+      </div>
+      <div class="responsible-card">
+        <div class="responsible-icon">⚖️</div>
+        <h3>Fairness</h3>
+        <p>Performance can vary across image types and conditions.</p>
+      </div>
+      <div class="responsible-card">
+        <div class="responsible-icon">🔍</div>
+        <h3>Transparency</h3>
+        <p>AI predictions are recommendations and may be uncertain.</p>
+      </div>
+      <div class="responsible-card">
+        <div class="responsible-icon">👤</div>
+        <h3>Human Oversight</h3>
+        <p>Users should verify uncertain or hazardous cases.</p>
+      </div>
+    </div>
+
+    <div class="limitations-box">
+      <h3>AI Limitations</h3>
+      <ul>
+        <li>Similar-looking materials may be difficult to distinguish.</li>
+        <li>Poor image quality can reduce accuracy.</li>
+        <li>Multiple objects can create ambiguity.</li>
+        <li>Local waste rules vary.</li>
+        <li>AI predictions may be incorrect.</li>
+        <li>Hazardous materials require additional care.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="section-container footer-inner">
+    <div class="footer-brand">
+      <span class="logo-icon">♻️</span>
+      <span class="logo-text">EcoSort <span class="logo-accent">AI</span></span>
+      <p>Turn Waste Into the Right Choice.</p>
+    </div>
+    <p class="footer-note">Built for the 1M1B AI for Sustainability Virtual Internship (IBM SkillsBuild &amp; AICTE) · SDG 12 &amp; SDG 11</p>
+  </div>
+</footer>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="script.js" defer></script>
+</body>
+</html>
