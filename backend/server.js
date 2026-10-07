@@ -52,7 +52,7 @@ const ai = AI_CONFIGURED
 // Middleware
 // ------------------------------------------------------------------
 
-app.use(cors({ origin: FRONTEND_URL }));
+app.use(cors());
 
 app.use(
   express.json({
