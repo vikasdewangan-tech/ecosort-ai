@@ -13,7 +13,7 @@
 // ------------------------------------------------------------------
 // Configuration — change this when deploying (see README)
 // ------------------------------------------------------------------
-const API_BASE_URL = window.ECOSORT_API_BASE_URL || 'http://localhost:5000';
+const API_BASE_URL = 'https://ecosort-ai-3d4q.onrender.com';
 
 // ------------------------------------------------------------------
 // State
